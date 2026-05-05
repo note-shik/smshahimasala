@@ -1,0 +1,2097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SM Shahi Masala – Shahi Swad, Har Rasoi Mein</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS CUSTOM PROPERTIES – Royal Palette
+    ============================================================ */
+    :root {
+      --crimson:      #8B0000;
+      --crimson-deep: #5C0000;
+      --gold:         #C9901B;
+      --gold-light:   #F0C040;
+      --gold-pale:    #F5E6B0;
+      --black:        #0A0400;
+      --ink:          #1A0C00;
+      --parchment:    #FDF5E6;
+      --spice-brown:  #3D1C02;
+      --warm-white:   #FFF8EE;
+      --text-muted:   #7A5C3A;
+
+      --font-display: 'Cinzel Decorative', serif;
+      --font-body:    'Cormorant Garamond', serif;
+      --font-ui:      'Rajdhani', sans-serif;
+
+      --transition:   0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-gold:  0 4px 30px rgba(201, 144, 27, 0.25);
+      --shadow-dark:  0 8px 40px rgba(10, 4, 0, 0.55);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--black);
+      color: var(--parchment);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--ink); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ============================================================
+       LOADER
+    ============================================================ */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--black);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+    }
+
+    #loader.hidden { opacity: 0; visibility: hidden; }
+
+    .loader-emblem {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: var(--gold);
+      border-bottom-color: var(--crimson);
+      animation: spin 1.2s linear infinite;
+    }
+
+    .loader-text {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--gold-light);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes spin   { to { transform: rotate(360deg); } }
+    @keyframes pulse  { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
+    /* ============================================================
+       ORNAMENT DIVIDER
+    ============================================================ */
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1.2rem 0;
+    }
+    .ornament span {
+      display: block;
+      height: 1px;
+      width: 80px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .ornament-icon {
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    /* ============================================================
+       SECTION LABEL
+    ============================================================ */
+    .section-label {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      text-transform: uppercase;
+      display: block;
+      text-align: center;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.5rem);
+      color: var(--gold-light);
+      text-align: center;
+      line-height: 1.2;
+      text-shadow: 0 2px 20px rgba(201, 144, 27, 0.3);
+    }
+
+    .section-subtitle {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      color: var(--gold-pale);
+      text-align: center;
+      max-width: 620px;
+      margin: 1rem auto 0;
+      line-height: 1.7;
+      font-style: italic;
+      opacity: 0.85;
+    }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-ui);
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.2rem;
+      border-radius: 2px;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.08);
+      transform: translateX(-101%);
+      transition: transform 0.3s ease;
+    }
+
+    .btn:hover::before { transform: translateX(0); }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), #A87010);
+      color: var(--black);
+      box-shadow: 0 4px 20px rgba(201, 144, 27, 0.4);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(201, 144, 27, 0.6);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold-light);
+      border: 1.5px solid var(--gold);
+    }
+
+    .btn-outline:hover {
+      background: rgba(201, 144, 27, 0.1);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    /* ============================================================
+       NAVBAR
+    ============================================================ */
+    #navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 1.2rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+    }
+
+    #navbar.scrolled {
+      background: rgba(10, 4, 0, 0.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 2px 30px rgba(0,0,0,0.5);
+      padding: 0.8rem 5%;
+    }
+
+    .nav-logo {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .nav-logo-main {
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-logo-sub {
+      font-family: var(--font-ui);
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: var(--font-ui);
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-pale);
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: var(--gold);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta {
+      font-family: var(--font-ui);
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black) !important;
+      background: linear-gradient(135deg, var(--gold), #A87010);
+      padding: 0.5rem 1.4rem;
+      border-radius: 2px;
+      transition: var(--transition) !important;
+    }
+
+    .nav-cta:hover {
+      box-shadow: 0 4px 20px rgba(201,144,27,0.5);
+      transform: translateY(-1px);
+    }
+
+    .nav-cta::after { display: none !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 2px;
+      width: 24px;
+      background: var(--gold-light);
+      transition: var(--transition);
+      border-radius: 2px;
+    }
+
+    /* Mobile nav */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: min(300px, 80vw);
+      background: var(--ink);
+      z-index: 999;
+      padding: 5rem 2rem 2rem;
+      flex-direction: column;
+      gap: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: -4px 0 30px rgba(0,0,0,0.5);
+      border-left: 1px solid rgba(201,144,27,0.2);
+    }
+
+    .mobile-nav.open { transform: translateX(0); }
+
+    .mobile-nav a {
+      font-family: var(--font-ui);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-pale);
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid rgba(201,144,27,0.15);
+      transition: color 0.3s;
+    }
+
+    .mobile-nav a:hover { color: var(--gold-light); }
+
+    .nav-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 998;
+    }
+
+    .nav-overlay.open { display: block; }
+
+    /* Close btn */
+    .mobile-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* Layered SVG spice background */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 70% 50%, rgba(139,0,0,0.45) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 70% at 20% 60%, rgba(201,144,27,0.2) 0%, transparent 65%),
+        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(61,28,2,0.85) 0%, transparent 80%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cdefs%3E%3CradialGradient id='rg1' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23C9901B' stop-opacity='0.15'/%3E%3Cstop offset='100%25' stop-color='%238B0000' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='600' height='600' fill='%230A0400'/%3E%3Ccircle cx='300' cy='300' r='280' fill='url(%23rg1)'/%3E%3C/svg%3E") center/cover,
+        var(--black);
+      z-index: 0;
+    }
+
+    /* Geometric mandala overlay */
+    .hero-mandala {
+      position: absolute;
+      right: -8vw;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(600px, 60vw);
+      opacity: 0.07;
+      animation: slowSpin 60s linear infinite;
+    }
+
+    @keyframes slowSpin { to { transform: translateY(-50%) rotate(360deg); } }
+
+    /* Spice bowl illustration – pure CSS */
+    .hero-visual {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: min(420px, 42vw);
+      height: min(420px, 42vw);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .spice-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .spice-tile {
+      border-radius: 8px;
+      aspect-ratio: 1;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-dark);
+      border: 1px solid rgba(201,144,27,0.15);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .spice-tile:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 40px rgba(201,144,27,0.3);
+    }
+
+    .spice-tile::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+    }
+
+    /* Turmeric */
+    .tile-turmeric::before {
+      background: radial-gradient(circle at 40% 40%,
+        #FFD700, #E8A020 30%, #C67B00 60%, #8B4500 100%);
+    }
+    /* Red chilli */
+    .tile-chilli::before {
+      background: radial-gradient(circle at 40% 40%,
+        #FF2D00, #C41200 30%, #8B0000 60%, #3D0000 100%);
+    }
+    /* Coriander */
+    .tile-coriander::before {
+      background: radial-gradient(circle at 40% 40%,
+        #C8A855, #9A7A30 30%, #6B5020 60%, #3D2C05 100%);
+    }
+    /* Garam masala */
+    .tile-garam::before {
+      background: radial-gradient(circle at 40% 40%,
+        #8B4513, #6B3010 30%, #4A1E08 60%, #2A0E02 100%);
+    }
+
+    .spice-tile-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.6rem 0.8rem;
+      background: linear-gradient(transparent, rgba(10,4,0,0.85));
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-pale);
+      text-align: center;
+    }
+
+    /* Particle dots */
+    .spice-tile::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.4) 1px, transparent 1px);
+      background-size: 18px 18px;
+      opacity: 0.15;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 55%;
+      padding: 0 5%;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,144,27,0.35);
+      padding: 0.4rem 1.2rem;
+      border-radius: 1px;
+      margin-bottom: 1.8rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-badge::before, .hero-badge::after {
+      content: '✦';
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+
+    .hero-heading {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: var(--gold-light);
+      line-height: 1.1;
+      text-shadow: 0 4px 30px rgba(201,144,27,0.4), 0 0 80px rgba(139,0,0,0.5);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-devanagari {
+      display: block;
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      color: var(--gold);
+      font-family: var(--font-body);
+      font-style: italic;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: var(--gold-pale);
+      line-height: 1.7;
+      max-width: 500px;
+      opacity: 0.9;
+      font-style: italic;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      z-index: 2;
+    }
+
+    .scroll-indicator span {
+      font-family: var(--font-ui);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    .scroll-mouse {
+      width: 22px;
+      height: 36px;
+      border: 1.5px solid rgba(201,144,27,0.5);
+      border-radius: 11px;
+      position: relative;
+    }
+
+    .scroll-mouse::before {
+      content: '';
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 2px;
+      animation: scrollDot 1.8s ease-in-out infinite;
+    }
+
+    @keyframes scrollDot {
+      0%   { top: 5px; opacity: 1; }
+      80%  { top: 18px; opacity: 0; }
+      100% { top: 5px; opacity: 0; }
+    }
+
+    /* ============================================================
+       MARQUEE STRIP
+    ============================================================ */
+    .marquee-strip {
+      background: linear-gradient(90deg, var(--crimson-deep), var(--crimson));
+      overflow: hidden;
+      padding: 0.75rem 0;
+      border-top: 1px solid rgba(201,144,27,0.25);
+      border-bottom: 1px solid rgba(201,144,27,0.25);
+    }
+
+    .marquee-inner {
+      display: flex;
+      gap: 3rem;
+      width: max-content;
+      animation: marquee 20s linear infinite;
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: var(--font-ui);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      white-space: nowrap;
+    }
+
+    .marquee-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ============================================================
+       PRODUCTS SECTION
+    ============================================================ */
+    #products {
+      padding: 6rem 5%;
+      background: var(--ink);
+      position: relative;
+    }
+
+    #products::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+      margin-top: 3.5rem;
+    }
+
+    .product-card {
+      background: linear-gradient(160deg, rgba(61,28,2,0.6), rgba(10,4,0,0.9));
+      border: 1px solid rgba(201,144,27,0.18);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(201,144,27,0.2), 0 0 0 1px rgba(201,144,27,0.35);
+      border-color: rgba(201,144,27,0.45);
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--crimson), var(--gold), var(--crimson));
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+      transform-origin: left;
+    }
+
+    .product-card:hover::before { transform: scaleX(1); }
+
+    .product-img-wrap {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .product-img-bg {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5rem;
+      position: relative;
+    }
+
+    .product-card:hover .product-img-bg { transform: scale(1.06); }
+
+    /* Individual product bg colors */
+    .bg-meat {
+      background: radial-gradient(circle at 35% 35%,
+        #8B2500 0%, #5C1500 40%, #2A0800 100%);
+    }
+    .bg-kebab {
+      background: radial-gradient(circle at 35% 35%,
+        #8B4020 0%, #5C2510 40%, #2A0D05 100%);
+    }
+    .bg-garam {
+      background: radial-gradient(circle at 35% 35%,
+        #6B3010 0%, #4A1E08 40%, #1E0802 100%);
+    }
+    .bg-turmeric {
+      background: radial-gradient(circle at 35% 35%,
+        #DAA520 0%, #C68000 40%, #7A4800 100%);
+    }
+
+    .product-emoji-ring {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 2px solid rgba(201,144,27,0.3);
+      background: rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: var(--crimson);
+      color: var(--gold-pale);
+      font-family: var(--font-ui);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 1px;
+    }
+
+    .product-body {
+      padding: 1.4rem 1.5rem 1.6rem;
+    }
+
+    .product-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--gold-light);
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+    }
+
+    .product-desc {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--gold-pale);
+      opacity: 0.8;
+      line-height: 1.6;
+      font-style: italic;
+      margin-bottom: 1.2rem;
+    }
+
+    .product-btn {
+      font-family: var(--font-ui);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,144,27,0.4);
+      padding: 0.5rem 1.2rem;
+      border-radius: 2px;
+      transition: var(--transition);
+      display: inline-block;
+    }
+
+    .product-card:hover .product-btn {
+      background: var(--gold);
+      color: var(--black);
+      border-color: var(--gold);
+    }
+
+    /* ============================================================
+       WHY CHOOSE US
+    ============================================================ */
+    #why {
+      padding: 6rem 5%;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-bg-ornament {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,144,27,0.05);
+      pointer-events: none;
+    }
+
+    .why-bg-ornament::before {
+      content: '';
+      position: absolute;
+      inset: 30px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,144,27,0.05);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+
+    .why-card {
+      text-align: center;
+      padding: 2.5rem 1.8rem;
+      border: 1px solid rgba(201,144,27,0.12);
+      border-radius: 4px;
+      background: linear-gradient(160deg, rgba(61,28,2,0.3), rgba(10,4,0,0.6));
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(201,144,27,0.08), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .why-card:hover {
+      border-color: rgba(201,144,27,0.35);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .why-card:hover::after { opacity: 1; }
+
+    .why-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(201,144,27,0.15), rgba(139,0,0,0.2));
+      border: 1px solid rgba(201,144,27,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      margin: 0 auto 1.2rem;
+      transition: var(--transition);
+    }
+
+    .why-card:hover .why-icon {
+      background: linear-gradient(135deg, rgba(201,144,27,0.3), rgba(139,0,0,0.35));
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    .why-title {
+      font-family: var(--font-display);
+      font-size: 0.9rem;
+      color: var(--gold-light);
+      margin-bottom: 0.7rem;
+    }
+
+    .why-desc {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--gold-pale);
+      opacity: 0.75;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    /* ============================================================
+       ABOUT
+    ============================================================ */
+    #about {
+      padding: 6rem 5%;
+      background: var(--ink);
+      position: relative;
+    }
+
+    #about::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-frame {
+      border: 2px solid rgba(201,144,27,0.3);
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/5;
+      background: linear-gradient(160deg, rgba(139,0,0,0.4), rgba(61,28,2,0.8), rgba(10,4,0,0.95));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-frame-inner {
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .about-year {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--gold-light);
+      opacity: 0.15;
+      line-height: 1;
+    }
+
+    .about-frame-text {
+      font-family: var(--font-body);
+      font-size: 1.4rem;
+      color: var(--gold-pale);
+      font-style: italic;
+      opacity: 0.85;
+      line-height: 1.6;
+    }
+
+    /* Corner ornaments */
+    .about-frame::before, .about-frame::after {
+      content: '';
+      position: absolute;
+      width: 30px; height: 30px;
+      border-color: var(--gold);
+      border-style: solid;
+      opacity: 0.5;
+    }
+    .about-frame::before { top: 10px; left: 10px; border-width: 2px 0 0 2px; }
+    .about-frame::after  { bottom: 10px; right: 10px; border-width: 0 2px 2px 0; }
+
+    .about-badge-float {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(135deg, var(--crimson-deep), var(--crimson));
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-dark);
+    }
+
+    .about-badge-float span:first-child {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+
+    .about-badge-float span:last-child {
+      font-family: var(--font-ui);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-pale);
+      text-align: center;
+    }
+
+    .about-content { padding: 1rem 0; }
+
+    .about-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      color: var(--gold-light);
+      line-height: 1.25;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .about-text {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: var(--gold-pale);
+      line-height: 1.85;
+      opacity: 0.88;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .about-stat {
+      text-align: left;
+    }
+
+    .about-stat-num {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--gold-light);
+      display: block;
+      line-height: 1;
+    }
+
+    .about-stat-label {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    #testimonials {
+      padding: 6rem 5%;
+      background: var(--black);
+      position: relative;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.8rem;
+      margin-top: 3.5rem;
+    }
+
+    .testimonial-card {
+      background: linear-gradient(160deg, rgba(61,28,2,0.4), rgba(10,4,0,0.7));
+      border: 1px solid rgba(201,144,27,0.15);
+      border-radius: 4px;
+      padding: 2rem 1.8rem;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .testimonial-card:hover {
+      border-color: rgba(201,144,27,0.35);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .testimonial-quote-mark {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      color: var(--gold);
+      opacity: 0.2;
+      line-height: 0.7;
+      margin-bottom: 1rem;
+    }
+
+    .testimonial-text {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--gold-pale);
+      opacity: 0.9;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 1rem;
+    }
+
+    .star { color: var(--gold); font-size: 0.85rem; }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--crimson), var(--spice-brown));
+      border: 1.5px solid rgba(201,144,27,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      flex-shrink: 0;
+    }
+
+    .author-info-name {
+      font-family: var(--font-ui);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.05em;
+    }
+
+    .author-info-place {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ============================================================
+       CONTACT
+    ============================================================ */
+    #contact {
+      padding: 6rem 5%;
+      background: var(--ink);
+      position: relative;
+    }
+
+    #contact::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      max-width: 1000px;
+      margin: 3.5rem auto 0;
+      align-items: start;
+    }
+
+    .contact-info-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 1.8rem;
+    }
+
+    .contact-info-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(139,0,0,0.3);
+      border: 1px solid rgba(201,144,27,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-info-label {
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .contact-info-value {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--gold-pale);
+      line-height: 1.5;
+    }
+
+    .wa-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: var(--font-ui);
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: #25D366;
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 2px;
+      margin-top: 1rem;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .wa-button:hover {
+      background: #1ebe5a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.3);
+    }
+
+    /* Contact form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group { position: relative; }
+
+    .form-input {
+      width: 100%;
+      background: rgba(10,4,0,0.6);
+      border: 1px solid rgba(201,144,27,0.2);
+      border-radius: 2px;
+      padding: 0.9rem 1rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--gold-pale);
+      transition: border-color 0.3s, box-shadow 0.3s;
+      outline: none;
+    }
+
+    .form-input::placeholder { color: rgba(245,230,176,0.4); }
+
+    .form-input:focus {
+      border-color: rgba(201,144,27,0.55);
+      box-shadow: 0 0 0 3px rgba(201,144,27,0.08);
+    }
+
+    textarea.form-input { resize: vertical; min-height: 100px; }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    #footer {
+      background: var(--black);
+      border-top: 1px solid rgba(201,144,27,0.15);
+      padding: 3.5rem 5% 1.5rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(201,144,27,0.1);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-brand-name {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-brand-desc {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-top: 0.7rem;
+      max-width: 260px;
+    }
+
+    .footer-heading {
+      font-family: var(--font-ui);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .footer-links { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .footer-links a {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover { color: var(--gold-pale); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copy {
+      font-family: var(--font-ui);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+    }
+
+    .footer-tagline {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-style: italic;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+
+    /* ============================================================
+       FLOATING WHATSAPP
+    ============================================================ */
+    #wa-float {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 56px;
+      height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+      cursor: pointer;
+      z-index: 900;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+    }
+
+    #wa-float:hover {
+      transform: scale(1.12);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.6);
+    }
+
+    #wa-float::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.4);
+      animation: waPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes waPulse {
+      0%,100% { transform: scale(1); opacity: 0.6; }
+      50%      { transform: scale(1.2); opacity: 0; }
+    }
+
+    /* ============================================================
+       SCROLL ANIMATIONS
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal-left.visible,
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Stagger delays */
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .about-inner  { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-top   { grid-template-columns: 1fr 1fr; }
+      .hero-content { max-width: 100%; }
+      .hero-visual  { display: none; }
+    }
+
+    @media (max-width: 700px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-nav { display: flex; }
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-heading { font-size: 1.9rem; }
+      .hero-btns { flex-direction: column; }
+      .btn { width: 100%; justify-content: center; }
+      .about-stats { gap: 1.5rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       LOADER
+  ============================================================ -->
+  <div id="loader">
+    <div class="loader-emblem"></div>
+    <div class="loader-text">SM Shahi Masala</div>
+  </div>
+
+  <!-- ============================================================
+       NAVBAR
+  ============================================================ -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <span class="nav-logo-main">SM Shahi Masala</span>
+      <span class="nav-logo-sub">Since 1982 · Pure · Authentic</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#products">Products</a></li>
+      <li><a href="#why">Our Promise</a></li>
+      <li><a href="#about">Our Story</a></li>
+      <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile nav overlay -->
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="mobile-nav" id="mobileNav">
+    <button class="mobile-close" id="mobileClose">✕</button>
+    <a href="#products"     onclick="closeMobile()">Products</a>
+    <a href="#why"          onclick="closeMobile()">Our Promise</a>
+    <a href="#about"        onclick="closeMobile()">Our Story</a>
+    <a href="#testimonials" onclick="closeMobile()">Reviews</a>
+    <a href="#contact"      onclick="closeMobile()">Contact Us</a>
+  </nav>
+
+  <!-- ============================================================
+       HERO
+  ============================================================ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+
+    <!-- Mandala SVG -->
+    <svg class="hero-mandala" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <circle cx="200" cy="200" r="190" stroke="#C9901B" stroke-width="1"/>
+      <circle cx="200" cy="200" r="150" stroke="#C9901B" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="110" stroke="#C9901B" stroke-width="1"/>
+      <circle cx="200" cy="200" r="70"  stroke="#C9901B" stroke-width="0.5"/>
+      <circle cx="200" cy="200" r="30"  stroke="#C9901B" stroke-width="1"/>
+      <!-- petals -->
+      <g stroke="#C9901B" stroke-width="0.5">
+        <line x1="200" y1="10"  x2="200" y2="390"/>
+        <line x1="10"  y1="200" x2="390" y2="200"/>
+        <line x1="54"  y1="54"  x2="346" y2="346"/>
+        <line x1="346" y1="54"  x2="54"  y2="346"/>
+        <line x1="200" y1="10"  x2="390" y2="200"/>
+        <line x1="390" y1="200" x2="200" y2="390"/>
+        <line x1="200" y1="390" x2="10"  y2="200"/>
+        <line x1="10"  y1="200" x2="200" y2="10"/>
+      </g>
+      <polygon points="200,50 350,350 50,350" stroke="#C9901B" stroke-width="0.5" fill="none" opacity="0.3"/>
+      <polygon points="200,350 350,50 50,50" stroke="#C9901B" stroke-width="0.5" fill="none" opacity="0.3"/>
+    </svg>
+
+    <!-- Spice grid visual -->
+    <div class="hero-visual">
+      <div class="spice-grid">
+        <div class="spice-tile tile-turmeric">
+          <div class="spice-tile-label">Haldi</div>
+        </div>
+        <div class="spice-tile tile-chilli">
+          <div class="spice-tile-label">Lal Mirch</div>
+        </div>
+        <div class="spice-tile tile-coriander">
+          <div class="spice-tile-label">Dhaniya</div>
+        </div>
+        <div class="spice-tile tile-garam">
+          <div class="spice-tile-label">Garam Masala</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero content -->
+    <div class="hero-content">
+      <div class="hero-badge">Est. 1982 · Family Heritage</div>
+      <h1 class="hero-heading">
+        Shahi Swad,<br/>Har Rasoi Mein
+      </h1>
+      <p class="hero-sub">
+        Handcrafted blends from generations of spice mastery —
+        where purity meets tradition, and every pinch tells a story.
+      </p>
+      <div class="hero-btns">
+        <a href="#products" class="btn btn-gold">Explore Products</a>
+        <a href="#contact"  class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-mouse"></div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MARQUEE
+  ============================================================ -->
+  <div class="marquee-strip" aria-hidden="true">
+    <div class="marquee-inner">
+      <!-- Repeated twice for seamless loop -->
+      <span class="marquee-item"><span class="marquee-dot"></span>100% Pure Spices</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>No Artificial Colours</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Traditional Recipes</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Hygienic Processing</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Rich Aroma, Every Time</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Family Heritage Since 1982</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>100% Pure Spices</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>No Artificial Colours</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Traditional Recipes</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Hygienic Processing</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Rich Aroma, Every Time</span>
+      <span class="marquee-item"><span class="marquee-dot"></span>Family Heritage Since 1982</span>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       PRODUCTS
+  ============================================================ -->
+  <section id="products">
+    <span class="section-label reveal">Our Masala Range</span>
+    <h2 class="section-title reveal delay-1">Flavours Crafted with Legacy</h2>
+    <p class="section-subtitle reveal delay-2">
+      Each blend is a culmination of age-old recipes, sun-dried whole spices,
+      and the patience of true artisanship.
+    </p>
+    <div class="ornament reveal delay-2">
+      <span></span><span class="ornament-icon">✦</span><span></span>
+    </div>
+
+    <div class="products-grid">
+
+      <!-- Meat Masala -->
+      <div class="product-card reveal delay-1">
+        <div class="product-img-wrap">
+          <div class="product-img-bg bg-meat">
+            <div class="product-emoji-ring">🍖</div>
+          </div>
+          <div class="product-badge">Bestseller</div>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Meat Masala Mix</h3>
+          <p class="product-desc">
+            A bold, complex blend of 18 hand-selected spices — crafted for rich, slow-cooked mutton and chicken curries that carry the depth of royal kitchens.
+          </p>
+          <span class="product-btn">Enquire Now →</span>
+        </div>
+      </div>
+
+      <!-- Kebab Masala -->
+      <div class="product-card reveal delay-2">
+        <div class="product-img-wrap">
+          <div class="product-img-bg bg-kebab">
+            <div class="product-emoji-ring">🔥</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Kebab Masala</h3>
+          <p class="product-desc">
+            Aromatic and smoky with hints of char — this blend transforms seekh kebab and tikka into the centrepiece of any daawat.
+          </p>
+          <span class="product-btn">Enquire Now →</span>
+        </div>
+      </div>
+
+      <!-- Garam Masala -->
+      <div class="product-card reveal delay-3">
+        <div class="product-img-wrap">
+          <div class="product-img-bg bg-garam">
+            <div class="product-emoji-ring">🌿</div>
+          </div>
+          <div class="product-badge">Classic</div>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Garam Masala</h3>
+          <p class="product-desc">
+            The crown jewel of Indian cooking. Stone-ground cardamom, cloves, and bay leaf — warm, floral, and unmistakably Shahi.
+          </p>
+          <span class="product-btn">Enquire Now →</span>
+        </div>
+      </div>
+
+      <!-- Turmeric Powder -->
+      <div class="product-card reveal delay-4">
+        <div class="product-img-wrap">
+          <div class="product-img-bg bg-turmeric">
+            <div class="product-emoji-ring">🌾</div>
+          </div>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Turmeric Powder</h3>
+          <p class="product-desc">
+            Single-origin Lakadong haldi — vibrant golden hue with high curcumin content. The purity your family deserves in every meal.
+          </p>
+          <span class="product-btn">Enquire Now →</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       WHY CHOOSE US
+  ============================================================ -->
+  <section id="why">
+    <div class="why-bg-ornament"></div>
+
+    <span class="section-label reveal">Why Shahi Masala</span>
+    <h2 class="section-title reveal delay-1">Our Promise to Every Kitchen</h2>
+    <p class="section-subtitle reveal delay-2">
+      Four pillars that have upheld our reputation across decades and generations.
+    </p>
+    <div class="ornament reveal delay-2">
+      <span></span><span class="ornament-icon">✦</span><span></span>
+    </div>
+
+    <div class="why-grid">
+
+      <div class="why-card reveal delay-1">
+        <div class="why-icon">🌿</div>
+        <h3 class="why-title">100% Pure</h3>
+        <p class="why-desc">
+          No fillers, no artificial colours, no adulteration — ever.
+          We source whole spices directly from farmers and grind them fresh.
+        </p>
+      </div>
+
+      <div class="why-card reveal delay-2">
+        <div class="why-icon">🏭</div>
+        <h3 class="why-title">Hygienic Processing</h3>
+        <p class="why-desc">
+          Our facility follows FSSAI-certified standards with dust-free, clean-room grinding to protect every batch from contamination.
+        </p>
+      </div>
+
+      <div class="why-card reveal delay-3">
+        <div class="why-icon">📜</div>
+        <h3 class="why-title">Traditional Recipes</h3>
+        <p class="why-desc">
+          Our formulas are rooted in 40-year-old family manuscripts, unchanged and unapologetically authentic.
+        </p>
+      </div>
+
+      <div class="why-card reveal delay-4">
+        <div class="why-icon">✨</div>
+        <h3 class="why-title">Rich Aroma</h3>
+        <p class="why-desc">
+          Slow-roasted spices retain their essential oils longer — ensuring the fragrance that fills the kitchen is as powerful as the taste.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT
+  ============================================================ -->
+  <section id="about">
+    <span class="section-label reveal">Our Heritage</span>
+    <h2 class="section-title reveal delay-1">A Story Rooted in Spice & Soul</h2>
+    <div class="ornament reveal delay-1">
+      <span></span><span class="ornament-icon">✦</span><span></span>
+    </div>
+
+    <div class="about-inner">
+      <div class="about-visual reveal-left">
+        <div class="about-frame">
+          <div class="about-frame-inner">
+            <div class="about-year">1982</div>
+            <p class="about-frame-text">
+              "Where tradition breathes<br/>in every grain of masala."
+            </p>
+          </div>
+        </div>
+        <div class="about-badge-float">
+          <span>40+</span>
+          <span>Years of Trust</span>
+        </div>
+      </div>
+
+      <div class="about-content reveal-right">
+        <span class="section-label" style="text-align:left;">SM Shahi Masala</span>
+        <h3 class="about-heading">
+          From a Family Kitchen<br/>to Every Kitchen in India
+        </h3>
+        <p class="about-text">
+          It began in 1982 in a small home in the heart of Uttar Pradesh, where our founder
+          Shri Shyam Mohan ji ground spices by hand each morning using recipes passed down
+          from his grandmother. What started as a labour of love for the neighbourhood
+          soon grew into something far greater.
+        </p>
+        <p class="about-text">
+          Today, SM Shahi Masala reaches thousands of households — yet our process remains
+          the same. We still select whole spices by hand, slow-roast them the traditional way,
+          and grind them fresh. No shortcuts. No compromises. Just the same honest flavour
+          your family has trusted for generations.
+        </p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <span class="about-stat-num">40+</span>
+            <span class="about-stat-label">Years of Legacy</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num">12+</span>
+            <span class="about-stat-label">Masala Blends</span>
+          </div>
+          <div class="about-stat">
+            <span class="about-stat-num">50K+</span>
+            <span class="about-stat-label">Happy Families</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TESTIMONIALS
+  ============================================================ -->
+  <section id="testimonials">
+    <span class="section-label reveal">What Families Say</span>
+    <h2 class="section-title reveal delay-1">Voices from the Kitchen</h2>
+    <p class="section-subtitle reveal delay-2">
+      The greatest testament to our masalas is the taste on your table.
+    </p>
+    <div class="ornament reveal delay-2">
+      <span></span><span class="ornament-icon">✦</span><span></span>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card reveal delay-1">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-text">
+          Maine kai brands try kiye hain, lekin SM Shahi Masala ka Meat Masala ka koi jawaab nahi.
+          Gosht itna khushboodaar banta hai ki poori basti ko pata chal jaata hai.
+        </p>
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="star">★</span><span class="star">★</span>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">RK</div>
+          <div>
+            <div class="author-info-name">Ramesh Kumar</div>
+            <div class="author-info-place">Lucknow, UP</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal delay-2">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-text">
+          Ghar ka khana bilkul hotel jaisa ban jaata hai. Unka Garam Masala itna
+          balanced hai — na zyada teekha, na pheeká. Meri saas ne bhi taareef ki,
+          jo ki ek miracle hai!
+        </p>
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="star">★</span><span class="star">★</span>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">PD</div>
+          <div>
+            <div class="author-info-name">Priya Devi</div>
+            <div class="author-info-place">Kanpur, UP</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal delay-3">
+        <div class="testimonial-quote-mark">"</div>
+        <p class="testimonial-text">
+          Running a dhaba for 15 years and I switched to SM Shahi Masala three years
+          ago. My customers immediately noticed the difference in flavour. This is the
+          real deal — no fillers, no shortcuts. Pure masala, pure trust.
+        </p>
+        <div class="testimonial-stars">
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span>
+          <span class="star">★</span><span class="star">★</span>
+        </div>
+        <div class="testimonial-author">
+          <div class="author-avatar">MA</div>
+          <div>
+            <div class="author-info-name">Mohammad Arif</div>
+            <div class="author-info-place">Agra, UP</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CONTACT
+  ============================================================ -->
+  <section id="contact">
+    <span class="section-label reveal">Reach Us</span>
+    <h2 class="section-title reveal delay-1">Connect with SM Shahi Masala</h2>
+    <p class="section-subtitle reveal delay-2">
+      For bulk orders, distributor enquiries, or just to share your recipe stories with us.
+    </p>
+    <div class="ornament reveal delay-2">
+      <span></span><span class="ornament-icon">✦</span><span></span>
+    </div>
+
+    <div class="contact-inner">
+      <div class="reveal-left">
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📞</div>
+          <div>
+            <div class="contact-info-label">Phone / WhatsApp</div>
+            <div class="contact-info-value">+91 98765 43210<br/>+91 91234 56789</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">✉️</div>
+          <div>
+            <div class="contact-info-label">Email</div>
+            <div class="contact-info-value">info@smshahimasala.com</div>
+          </div>
+        </div>
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📍</div>
+          <div>
+            <div class="contact-info-label">Address</div>
+            <div class="contact-info-value">
+              Plot No. 14, Udyog Vihar,<br/>
+              Kanpur Road, Lucknow – 226012,<br/>
+              Uttar Pradesh, India
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/919876543210" target="_blank" class="wa-button">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+          </svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+
+      <div class="reveal-right">
+        <form class="contact-form" onsubmit="handleForm(event)">
+          <div class="form-group">
+            <input type="text" class="form-input" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <input type="tel" class="form-input" placeholder="Phone / WhatsApp Number" required />
+          </div>
+          <div class="form-group">
+            <input type="email" class="form-input" placeholder="Email Address" />
+          </div>
+          <div class="form-group">
+            <select class="form-input" style="appearance:none;">
+              <option value="" disabled selected style="color:#555;">Enquiry Type</option>
+              <option>Retail Order</option>
+              <option>Bulk / Wholesale</option>
+              <option>Distributorship</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea class="form-input" placeholder="Your message..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold" style="width:100%; justify-content:center;">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-name">SM Shahi Masala</div>
+        <div class="ornament" style="justify-content:flex-start; margin: 0.5rem 0;">
+          <span style="width:40px;"></span>
+        </div>
+        <p class="footer-brand-desc">
+          A family legacy of purity, passion, and flavour — crafted to make
+          every Indian kitchen feel like royalty since 1982.
+        </p>
+      </div>
+      <div>
+        <div class="footer-heading">Quick Links</div>
+        <ul class="footer-links">
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#why">Our Promise</a></li>
+          <li><a href="#about">Our Story</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-heading">Our Products</div>
+        <ul class="footer-links">
+          <li><a href="#products">Meat Masala Mix</a></li>
+          <li><a href="#products">Kebab Masala</a></li>
+          <li><a href="#products">Garam Masala</a></li>
+          <li><a href="#products">Turmeric Powder</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2024 SM Shahi Masala. All rights reserved. FSSAI Lic. No. 12345678901234</span>
+      <span class="footer-tagline">शाही स्वाद, हर रसोई में</span>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       FLOATING WHATSAPP
+  ============================================================ -->
+  <a id="wa-float" href="https://wa.me/919876543210" target="_blank" title="Chat on WhatsApp" aria-label="WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+
+  <!-- ============================================================
+       JAVASCRIPT
+  ============================================================ -->
+  <script>
+    /* ---- LOADER ---- */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 1600);
+    });
+
+    /* ---- NAVBAR scroll behaviour ---- */
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ---- MOBILE NAV ---- */
+    const hamburger   = document.getElementById('hamburger');
+    const mobileNav   = document.getElementById('mobileNav');
+    const navOverlay  = document.getElementById('navOverlay');
+    const mobileClose = document.getElementById('mobileClose');
+
+    function openMobile() {
+      mobileNav.classList.add('open');
+      navOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobile() {
+      mobileNav.classList.remove('open');
+      navOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    hamburger.addEventListener('click', openMobile);
+    mobileClose.addEventListener('click', closeMobile);
+    navOverlay.addEventListener('click', closeMobile);
+
+    /* ---- SCROLL REVEAL ---- */
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ---- FORM HANDLER ---- */
+    function handleForm(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button[type="submit"]');
+      const original = btn.innerHTML;
+      btn.innerHTML = '✓ Message Sent!';
+      btn.style.background = 'linear-gradient(135deg, #2E7D32, #1B5E20)';
+      btn.disabled = true;
+      setTimeout(() => {
+        btn.innerHTML = original;
+        btn.style.background = '';
+        btn.disabled = false;
+        e.target.reset();
+      }, 3000);
+    }
+
+    /* ---- HERO PARALLAX (subtle) ---- */
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      const heroBg  = document.querySelector('.hero-bg');
+      if (heroBg && scrollY < window.innerHeight) {
+        heroBg.style.transform = `translateY(${scrollY * 0.3}px)`;
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
